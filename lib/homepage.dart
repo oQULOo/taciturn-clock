@@ -10,10 +10,45 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Container(
-        alignment: Alignment.center,
-        color: Colors.blue,
-        child: ClockView(),
+        padding: EdgeInsets.all(32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Clock',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+            Text(
+              'Clock',
+              style: TextStyle(color: Colors.white, fontSize: 64),
+            ),
+            Text(
+              'Clock',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            ClockView(),
+            Text(
+              'Timezone',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Icon(Icons.language, color: Colors.white),
+                SizedBox(width: 16),
+                Text(
+                  'UTC',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
