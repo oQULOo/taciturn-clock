@@ -27,43 +27,67 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.blue,
       body: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Clock',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  formattedTime,
-                  style: TextStyle(color: Colors.white, fontSize: 64),
-                ),
-                Text(
-                  formattedDate,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                ClockView(),
-                Text(
-                  'Timezone',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Icon(Icons.language, color: Colors.white),
-                    SizedBox(width: 16),
-                    Text(
-                      'UTC' + offsetSign + timezoneString,
-                      style: TextStyle(color: Colors.white, fontSize: 24),
-                    ),
-                  ],
-                ),
-              ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlatButton(
+                  onPressed: () {},
+                  child: Column(
+                    children: [
+                      FlutterLogo(),
+                      Text(
+                        'Clock',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
+                  )),
+            ],
+          ),
+
+          ///左側アイコンと右側時計部分とを隔てるライン
+          VerticalDivider(
+            color: Colors.white,
+            width: 1,
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 32, vertical: 64),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Clock',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Text(
+                    formattedTime,
+                    style: TextStyle(color: Colors.white, fontSize: 64),
+                  ),
+                  Text(
+                    formattedDate,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  ClockView(),
+                  Text(
+                    'Timezone',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Icon(Icons.language, color: Colors.white),
+                      SizedBox(width: 16),
+                      Text(
+                        'UTC' + offsetSign + timezoneString,
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

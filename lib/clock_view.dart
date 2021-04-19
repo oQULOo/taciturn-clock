@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 ///時計アニメーションを使うので、Statefulでかく必要がある
 class ClockView extends StatefulWidget {
+  final double size;
+  const ClockView({Key key, this.size}) : super(key: key);
   @override
   _ClockViewState createState() => _ClockViewState();
 }
@@ -23,15 +25,18 @@ class _ClockViewState extends State<ClockView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 300,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Container(
+        width: 300,
+        height: 300,
 
-      ///sin・cos使うと0度スタートになるので、-90度回転させないと時計でみたときの12時起点にならない！
-      child: Transform.rotate(
-        angle: -pi / 2,
-        child: CustomPaint(
-          painter: ClockPainter(),
+        ///sin・cos使うと0度スタートになるので、-90度回転させないと時計でみたときの12時起点にならない！
+        child: Transform.rotate(
+          angle: -pi / 2,
+          child: CustomPaint(
+            painter: ClockPainter(),
+          ),
         ),
       ),
     );
@@ -90,7 +95,8 @@ class ClockPainter extends CustomPainter {
     var dashBrush = Paint()
       ..color = Colors.amber[50]
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 3;
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
 
     canvas.drawCircle(center, radius - 40, fillBrush); //時計の内側
     canvas.drawCircle(center, radius - 40, outlineBrush); //時計の縁
@@ -119,7 +125,7 @@ class ClockPainter extends CustomPainter {
 
     ///時計回りの放射線状の線
     var outerCircleRadius = radius;
-    var innerCircleRadius = radius - 14;
+    var innerCircleRadius = radius * 0.9;
     for (double i = 0; i < 360; i += 12) {
       var x1 = centerX + outerCircleRadius * cos(i * pi / 180);
       var y1 = centerX + outerCircleRadius * sin(i * pi / 180);
