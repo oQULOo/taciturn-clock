@@ -30,10 +30,10 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildMenuButton('aaa'),
-              buildMenuButton('bbb'),
-              buildMenuButton('ccc'),
-              buildMenuButton('ddd'),
+              buildMenuButton('clock', 'assets/icon_btc.png'),
+              buildMenuButton('Alarm', 'assets/icon_btc.png'),
+              buildMenuButton('Timer', 'assets/icon_btc.png'),
+              buildMenuButton('Stopwatch', 'assets/icon_btc.png'),
             ],
           ),
 
@@ -117,14 +117,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding buildMenuButton(String title) {
+  Padding buildMenuButton(String title, String image) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: FlatButton(
           onPressed: () {},
           child: Column(
             children: [
-              FlutterLogo(),
+              Image.asset(
+                image,
+                scale: 10, //小さくなると表示が大きくなる
+              ),
               SizedBox(height: 16), //左側アイコンのサイズ
               Text(
                 title ?? '',
