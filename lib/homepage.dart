@@ -30,17 +30,10 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlatButton(
-                  onPressed: () {},
-                  child: Column(
-                    children: [
-                      FlutterLogo(),
-                      Text(
-                        'Clock',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                    ],
-                  )),
+              buildMenuButton('aaa'),
+              buildMenuButton('bbb'),
+              buildMenuButton('ccc'),
+              buildMenuButton('ddd'),
             ],
           ),
 
@@ -55,36 +48,65 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Clock',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      'Clock',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
                   ),
                   SizedBox(
                     height: 32,
                   ),
-                  Text(
-                    formattedTime,
-                    style: TextStyle(color: Colors.white, fontSize: 64),
+                  Flexible(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          formattedTime,
+                          style: TextStyle(color: Colors.white, fontSize: 64),
+                        ),
+                        Text(
+                          formattedDate,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    formattedDate,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  ClockView(),
-                  Text(
-                    'Timezone',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Icon(Icons.language, color: Colors.white),
-                      SizedBox(width: 16),
-                      Text(
-                        'UTC' + offsetSign + timezoneString,
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ],
+                  Flexible(
+                      flex: 4,
+                      fit: FlexFit.tight,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ClockView(
+                            size: MediaQuery.of(context).size.height / 4),
+                      )),
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Timezone',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Icon(Icons.language, color: Colors.white),
+                            SizedBox(width: 16),
+                            Text(
+                              'UTC' + offsetSign + timezoneString,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 24),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -92,6 +114,24 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Padding buildMenuButton(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: FlatButton(
+          onPressed: () {},
+          child: Column(
+            children: [
+              FlutterLogo(),
+              SizedBox(height: 16), //左側アイコンのサイズ
+              Text(
+                title ?? '',
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ],
+          )),
     );
   }
 }

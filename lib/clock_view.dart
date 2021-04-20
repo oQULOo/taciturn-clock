@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 ///時計アニメーションを使うので、Statefulでかく必要がある
 class ClockView extends StatefulWidget {
   final double size;
+
   const ClockView({Key key, this.size}) : super(key: key);
   @override
   _ClockViewState createState() => _ClockViewState();
@@ -28,8 +29,8 @@ class _ClockViewState extends State<ClockView> {
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
-        width: 300,
-        height: 300,
+        width: widget.size,
+        height: widget.size,
 
         ///sin・cos使うと0度スタートになるので、-90度回転させないと時計でみたときの12時起点にならない！
         child: Transform.rotate(
@@ -64,7 +65,7 @@ class ClockPainter extends CustomPainter {
       ..color = Colors.amber[50]
       ..style =
           PaintingStyle.stroke //stroke:縁をつくる、fill：塗り潰し、style設定しなければ塗り潰しになる
-      ..strokeWidth = 16; //縁の太さ
+      ..strokeWidth = size.width / 20; //縁の太さ
 
     ///時計の中心の色
     var centerFillBrush = Paint()..color = Colors.amber[50];
@@ -75,21 +76,21 @@ class ClockPainter extends CustomPainter {
           .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round //ラインを丸くする
-      ..strokeWidth = 8;
+      ..strokeWidth = size.width / 60;
 
     var minHandBrush = Paint()
       ..shader = RadialGradient(colors: [Colors.lightBlue, Colors.lightGreen])
           .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 10;
+      ..strokeWidth = size.width / 30;
 
     var hourHandBrush = Paint()
       ..shader = RadialGradient(colors: [Colors.green, Colors.yellow])
           .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 14;
+      ..strokeWidth = size.width / 24;
 
     ///時計回りの放射線状の線の描画スタイル
     var dashBrush = Paint()
@@ -98,27 +99,30 @@ class ClockPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    canvas.drawCircle(center, radius - 40, fillBrush); //時計の内側
-    canvas.drawCircle(center, radius - 40, outlineBrush); //時計の縁
+    canvas.drawCircle(center, radius * 0.75, fillBrush); //時計の内側
+    canvas.drawCircle(center, radius * 0.75, outlineBrush); //時計の縁
 
     ///時計の針のdrawLine終了点に使用
     ///80*はcenterからの距離を離すために必要(？)
     var hourHandX = centerX +
-        60 *
+        radius *
+            0.4 *
             cos((dateTime.hour * 30 + dateTime.minute * 0.5) *
                 pi /
                 180); //1時間後に急に針ががくっと動くのはやなので毎分0.5度足していく
     var hourHandY = centerX +
-        60 * sin((dateTime.hour * 30 + dateTime.minute * 0.5) * pi / 180);
+        radius *
+            0.4 *
+            sin((dateTime.hour * 30 + dateTime.minute * 0.5) * pi / 180);
     //時計の針:drawLine(開始点,終了点,描画スタイル)
     canvas.drawLine(center, Offset(hourHandX, hourHandY), hourHandBrush);
 
-    var minHandX = centerX + 80 * cos(dateTime.minute * 6 * pi / 180);
-    var minHandY = centerX + 80 * sin(dateTime.minute * 6 * pi / 180);
+    var minHandX = centerX + radius * 0.6 * cos(dateTime.minute * 6 * pi / 180);
+    var minHandY = centerX + radius * 0.6 * sin(dateTime.minute * 6 * pi / 180);
     canvas.drawLine(center, Offset(minHandX, minHandY), minHandBrush);
 
-    var secHandX = centerX + 80 * cos(dateTime.second * 6 * pi / 180);
-    var secHandY = centerX + 80 * sin(dateTime.second * 6 * pi / 180);
+    var secHandX = centerX + radius * 0.6 * cos(dateTime.second * 6 * pi / 180);
+    var secHandY = centerX + radius * 0.6 * sin(dateTime.second * 6 * pi / 180);
     canvas.drawLine(center, Offset(secHandX, secHandY), secHandBrush);
 
     canvas.drawCircle(center, 12, centerFillBrush); //時計の中心点
