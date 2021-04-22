@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qulock_app/enums.dart';
 
 import 'homepage.dart';
+import 'menu_info.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+
+      ///ChangeNotifier<T>の<T>は変更を察知させたいクラス名をいれるが、
+      ///<T>自体がChangeNotifierを継承している必要がある
+      home: ChangeNotifierProvider<MenuInfo>(
+        create: (context) => MenuInfo(MenuType.clock),
+        child: HomePage(),
+      ),
     );
   }
 }

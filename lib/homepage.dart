@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qulock_app/clock_view.dart';
 import 'package:intl/intl.dart';
+
+import 'menu_info.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -121,7 +124,10 @@ class _HomePageState extends State<HomePage> {
     return FlatButton(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         color: title == 'Clock' ? Colors.red : Colors.transparent,
-        onPressed: () {},
+        onPressed: () {
+          ///ManuIngoをProviderの監視対象にする
+          var menuInfo = Provider.of<MenuInfo>(context);
+        },
         child: Column(
           children: [
             Image.asset(
