@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qulock_app/clock_view.dart';
 import 'package:intl/intl.dart';
 
+import 'data.dart';
 import 'menu_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,12 +33,9 @@ class _HomePageState extends State<HomePage> {
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildMenuButton('Clock', 'assets/icon_btc.png'),
-              buildMenuButton('Alarm', 'assets/icon_btc.png'),
-              buildMenuButton('Timer', 'assets/icon_btc.png'),
-              buildMenuButton('Stopwatch', 'assets/icon_btc.png'),
-            ],
+            children: menuItems
+                .map((currentMenuInfo) => buildMenuButton(currentMenuInfo))
+                .toList(),
           ),
 
           ///左側アイコンと右側時計部分とを隔てるライン
@@ -120,23 +118,25 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildMenuButton(String title, String image) {
+  Widget buildMenuButton(MenuInfo currentMenuInfo) {
     return FlatButton(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
-        color: title == 'Clock' ? Colors.red : Colors.transparent,
+        color:
+            currentMenuInfo.title == 'Clock' ? Colors.red : Colors.transparent,
         onPressed: () {
-          ///ManuIngoをProviderの監視対象にする
+          ///ManuInfoをProviderの監視対象にする
           var menuInfo = Provider.of<MenuInfo>(context);
+          menuInfo.updateMenu(currentMenuInfo);
         },
         child: Column(
           children: [
             Image.asset(
-              image,
+              currentMenuInfo.imageSource,
               scale: 10, //小さくなると表示が大きくなる
             ),
             SizedBox(height: 16), //左側アイコンのサイズ
             Text(
-              title ?? '',
+              currentMenuInfo.title ?? '',
               style: TextStyle(color: Colors.white, fontSize: 14),
             ),
           ],

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:qulock_app/enums.dart';
 
-///コンストラクタ
+///Clock,Alarm,Timer,Stopwatchの4つのメニューのモデル
 class MenuInfo extends ChangeNotifier {
   ///メンバ変数
   MenuType menuType;
   String title;
   String imageSource;
 
-  ///メンバ変数の初期化
+  ///メンバ変数の初期化：コンストラクタ
   MenuInfo(this.menuType, {this.title, this.imageSource});
 
   ///内容が更新された場合、現在の値に最新の値を代入する
