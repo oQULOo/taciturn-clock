@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qulock_app/clock_view.dart';
+import 'package:qulock_app/views/clock_view.dart';
 import 'package:intl/intl.dart';
 import 'package:qulock_app/enums.dart';
 
-import 'data.dart';
-import 'menu_info.dart';
+import '../data.dart';
+import '../models/menu_info.dart';
 
 class HomePage extends StatefulWidget {
   @override

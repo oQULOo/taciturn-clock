@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qulock_app/enums.dart';
 
-import 'homepage.dart';
-import 'menu_info.dart';
+import 'views/homepage.dart';
+import 'models/menu_info.dart';
 
 void main() {
   runApp(MyApp());
