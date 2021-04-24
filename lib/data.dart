@@ -1,6 +1,6 @@
 import 'package:qulock_app/enums.dart';
 
-import 'menu_info.dart';
+import 'models/menu_info.dart';
 
 ///MenuInfoのリスト化
 List<MenuInfo> menuItems = [
