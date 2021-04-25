@@ -109,40 +109,43 @@ class _AlarmPageState extends State<AlarmPage> {
                 ),
               );
             }).followedBy([
-              DottedBorder(
-                strokeWidth: 3,
-                color: Colors.white,
-                borderType: BorderType.RRect, //点線を角丸にする
-                radius: Radius.circular(24), //角丸のアール値を指定
-                dashPattern: [7, 7], //[線分の長さ,間隔の幅]
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.all(Radius.circular(24))),
-                  child: FlatButton(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.add,
-                          size: 36,
-                          color: Colors.white,
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Add Alarm',
-                          style: TextStyle(
+              if (alarms.length < 5)
+                DottedBorder(
+                  strokeWidth: 3,
+                  color: Colors.white,
+                  borderType: BorderType.RRect, //点線を角丸にする
+                  radius: Radius.circular(24), //角丸のアール値を指定
+                  dashPattern: [7, 7], //[線分の長さ,間隔の幅]
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.all(Radius.circular(24))),
+                    child: FlatButton(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16),
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size: 36,
                             color: Colors.white,
                           ),
-                        )
-                      ],
+                          SizedBox(height: 8),
+                          Text(
+                            'Add Alarm',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
+                )
+              else
+                Text('Only 5 alarms allowed!'),
             ]).toList()),
           ), //リストはデータ型と一致する必要があるので、.map((e)のeにはAlarmInfo型の変数をいれる
         ],

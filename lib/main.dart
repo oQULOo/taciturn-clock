@@ -1,11 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:qulock_app/enums.dart';
 
 import 'views/homepage.dart';
 import 'models/menu_info.dart';
 
-void main() {
+///LoaclNotificationsの初期化
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ///LocalNotification Android用 通知欄に表示するアイコン
+  var initializationSettingsAndroid =
+      AndroidInitializationSettings('QULOCK_logo');
+
+  ///LocalNotification iOS用
+  var initializationSettingsIOS = IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      onDidReceiveLocalNotification:
+          (int id, String title, String body, String payload) async {});
+
+  ///LocalNotificationのOSごとの初期化
+  var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: ' + payload);
+    }
+  });
+
   runApp(MyApp());
 }
 
