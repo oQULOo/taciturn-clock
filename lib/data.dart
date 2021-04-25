@@ -1,6 +1,8 @@
+import 'package:qulock_app/constants/theme_data.dart';
 import 'package:qulock_app/enums.dart';
 
-import 'menu_info.dart';
+import 'models/alarm_info.dart';
+import 'models/menu_info.dart';
 
 ///MenuInfoのリスト化
 List<MenuInfo> menuItems = [
@@ -9,4 +11,12 @@ List<MenuInfo> menuItems = [
   MenuInfo(MenuType.timer, title: 'Timer', imageSource: 'assets/icon_btc.png'),
   MenuInfo(MenuType.stopwatch,
       title: 'Stopwatch', imageSource: 'assets/icon_btc.png'),
+];
+
+///Alarm画面において表示するListViewにわたすためのリスト
+List<AlarmInfo> alarms = [
+  AlarmInfo(DateTime.now().add(Duration(hours: 1)),
+      description: 'Offie', gradientColors: GradientColors.sky),
+  AlarmInfo(DateTime.now().add(Duration(hours: 2)),
+      description: 'Sport', gradientColors: GradientColors.sunset),
 ];
