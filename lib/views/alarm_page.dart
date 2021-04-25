@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:qulock_app/data.dart';
 
@@ -25,7 +26,7 @@ class _AlarmPageState extends State<AlarmPage> {
           ),
           Expanded(
             child: ListView(
-                children: alarms.map((alarm) {
+                children: alarms.map<Widget>((alarm) {
               return Container(
                 ///カードとカードの間にいい感じにスペースが入るように
                 margin: const EdgeInsets.only(bottom: 32),
@@ -35,13 +36,13 @@ class _AlarmPageState extends State<AlarmPage> {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.purple, Colors.red],
+                    colors: alarm.gradientColors,
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blueGrey.withOpacity(0.4),
+                      color: alarm.gradientColors.last.withOpacity(0.4),
                       blurRadius: 8,
                       spreadRadius: 2,
                       offset: Offset(4, 4),
@@ -107,7 +108,42 @@ class _AlarmPageState extends State<AlarmPage> {
                   ],
                 ),
               );
-            }).toList()),
+            }).followedBy([
+              DottedBorder(
+                strokeWidth: 3,
+                color: Colors.white,
+                borderType: BorderType.RRect, //点線を角丸にする
+                radius: Radius.circular(24), //角丸のアール値を指定
+                dashPattern: [7, 7], //[線分の長さ,間隔の幅]
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.all(Radius.circular(24))),
+                  child: FlatButton(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 16),
+                    onPressed: () {},
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.add,
+                          size: 36,
+                          color: Colors.white,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Add Alarm',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ]).toList()),
           ), //リストはデータ型と一致する必要があるので、.map((e)のeにはAlarmInfo型の変数をいれる
         ],
       ),
