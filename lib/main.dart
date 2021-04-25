@@ -6,6 +6,9 @@ import 'package:qulock_app/enums.dart';
 import 'views/homepage.dart';
 import 'models/menu_info.dart';
 
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 ///LoaclNotificationsの初期化
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -34,6 +37,8 @@ void main() async {
       debugPrint('notification payload: ' + payload);
     }
   });
+  tz.initializeTimeZones(); //LocalNotifcation2.0〜はこれが必要
+  // tz.setLocalLocation(tz.getLocation('Japan/Tokyo')); //タイムゾーンの設定
 
   runApp(MyApp());
 }
