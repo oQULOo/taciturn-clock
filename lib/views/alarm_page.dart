@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:qulock_app/data.dart';
+import 'package:qulock_app/models/alarm_info.dart';
+
+import '../main.dart';
 
 class AlarmPage extends StatefulWidget {
   AlarmPage({Key key}) : super(key: key);
@@ -124,7 +128,9 @@ class _AlarmPageState extends State<AlarmPage> {
                     child: FlatButton(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16),
-                      onPressed: () {},
+                      onPressed: () {
+                        scheduleAlarm();
+                      },
                       child: Column(
                         children: [
                           Icon(
@@ -151,5 +157,36 @@ class _AlarmPageState extends State<AlarmPage> {
         ],
       ),
     );
+  }
+
+  void scheduleAlarm(
+      {DateTime scheduledNotificationDateTime, AlarmInfo alarmInfo}) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'alarm_notif',
+      'alarm_notif',
+      'Channel for Alarm notification',
+      icon: 'codex_logo',
+      sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
+      largeIcon: DrawableResourceAndroidBitmap('codex_logo'),
+    );
+
+    ///LocalNotification_iOS固有
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+        sound: 'bensound-dreams.wav',
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true);
+
+    ///iOS,Android両方で使用するために必要
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Office',
+        alarmInfo.title,
+        scheduledNotificationDateTime,
+        platformChannelSpecifics);
   }
 }
