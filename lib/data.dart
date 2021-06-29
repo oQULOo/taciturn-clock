@@ -18,9 +18,9 @@ List<AlarmInfo> alarms = [
   AlarmInfo(
       alarmDateTime: DateTime.now().add(Duration(hours: 1)),
       title: 'Offie',
-      gradientColors: GradientColors.sky),
+      gradientColorIndex: GradientColors.sky),
   AlarmInfo(
       alarmDateTime: DateTime.now().add(Duration(hours: 2)),
       title: 'Sport',
-      gradientColors: GradientColors.sunset),
+      gradientColorIndex: GradientColors.sunset),
 ];

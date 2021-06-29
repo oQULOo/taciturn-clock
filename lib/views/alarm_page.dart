@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:qulock_app/alarm_helper.dart';
 import 'package:qulock_app/data.dart';
 import 'package:qulock_app/models/alarm_info.dart';
 
@@ -16,6 +17,28 @@ class AlarmPage extends StatefulWidget {
 }
 
 class _AlarmPageState extends State<AlarmPage> {
+  ///アラームを追加した場合に必要になるものシリーズ
+  DateTime _alarmTime;
+  String _alarmTimeString;
+  AlarmHelper _alarmHelper = AlarmHelper();
+  Future<List<AlarmInfo>> _alarms;
+  List<AlarmInfo> _currentAlarms;
+
+  @override
+  void initState() {
+    _alarmTime = DateTime.now();
+    _alarmHelper.initializeDatabase().then((value) {
+      print('--------database initialized');
+      loadAlarms();
+    });
+    super.initState();
+  }
+
+  void loadAlarms() {
+    _alarms = _alarmHelper.getAlarms();
+    if (mounted) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,13 +63,13 @@ class _AlarmPageState extends State<AlarmPage> {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: alarm.gradientColors,
+                    colors: alarm.gradientColorIndex,
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: alarm.gradientColors.last.withOpacity(0.4),
+                      color: alarm.gradientColorIndex.last.withOpacity(0.4),
                       blurRadius: 8,
                       spreadRadius: 2,
                       offset: Offset(4, 4),
