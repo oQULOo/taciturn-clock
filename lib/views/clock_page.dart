@@ -29,7 +29,7 @@ class _ClockPageState extends State<ClockPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 64),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 32,
@@ -37,7 +37,8 @@ class _ClockPageState extends State<ClockPage> {
           Flexible(
             flex: 2,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   formattedTime,
@@ -50,32 +51,37 @@ class _ClockPageState extends State<ClockPage> {
               ],
             ),
           ),
-          Flexible(
-              flex: 4,
-              fit: FlexFit.tight,
-              child: Align(
-                alignment: Alignment.center,
-                child: ClockView(size: MediaQuery.of(context).size.height / 4),
-              )),
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Flexible(
+                flex: 0,
+                fit: FlexFit.tight,
+                child: Align(
+                  alignment: Alignment.center,
+                  child:
+                      ClockView(size: MediaQuery.of(context).size.height / 3.5),
+                )),
+          ),
           Flexible(
             flex: 2,
             fit: FlexFit.tight,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   'Timezone',
-                  style: TextStyle(color: Colors.blueGrey[200], fontSize: 24),
+                  style: TextStyle(color: Colors.blueGrey[200], fontSize: 18),
                 ),
-                SizedBox(height: 16),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.language, color: Colors.blueGrey[200]),
                     SizedBox(width: 16),
                     Text(
                       'UTC' + offsetSign + timezoneString,
                       style:
-                          TextStyle(color: Colors.blueGrey[200], fontSize: 24),
+                          TextStyle(color: Colors.blueGrey[200], fontSize: 22),
                     ),
                   ],
                 ),

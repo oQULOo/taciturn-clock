@@ -6,8 +6,10 @@ import 'models/menu_info.dart';
 
 ///MenuInfoのリスト化
 List<MenuInfo> menuItems = [
-  MenuInfo(MenuType.clock, title: 'Clock', imageSource: 'assets/icon_btc.png'),
-  MenuInfo(MenuType.alarm, title: 'Alarm', imageSource: 'assets/icon_btc.png'),
+  MenuInfo(MenuType.clock,
+      title: 'Clock', imageSource: 'assets/icon_clock.png'),
+  MenuInfo(MenuType.alarm,
+      title: 'Alarm', imageSource: 'assets/icon_alarm.png'),
 ];
 
 ///Alarm画面において表示するListViewにわたすためのリスト
@@ -19,5 +21,5 @@ List<AlarmInfo> alarms = [
   AlarmInfo(
       alarmDateTime: DateTime.now().add(Duration(hours: 2)),
       title: 'Sport',
-      gradientColorIndex: GradientColors.sunset),
+      gradientColorIndex: GradientColors.sky),
 ];

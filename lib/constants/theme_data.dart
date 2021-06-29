@@ -7,6 +7,6 @@ class CustomeColors {
 }
 
 class GradientColors {
-  static List<Color> sky = [Colors.teal[200], Colors.blueGrey[100]];
+  static List<Color> sky = [Colors.blueGrey[300], Colors.blueGrey[100]];
   static List<Color> sunset = [Colors.deepPurple[200], Colors.blueGrey[100]];
 }
