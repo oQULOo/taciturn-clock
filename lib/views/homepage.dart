@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blueGrey[50],
       body: Row(
         children: [
           Column(
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.only(topRight: Radius.circular(32))),
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           color: currentMenuInfo.menuType == value.menuType
-              ? Colors.blue[700]
+              ? Colors.blueGrey[100]
               : Colors.transparent,
           onPressed: () {
             ///ManuInfoをProviderの監視対象にする

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'clock_view.dart';
 
+///時計表示ページ
 class ClockPage extends StatefulWidget {
   ClockPage({Key key}) : super(key: key);
 
@@ -30,14 +31,6 @@ class _ClockPageState extends State<ClockPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
-            child: Text(
-              'Clock',
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            ),
-          ),
           SizedBox(
             height: 32,
           ),
@@ -48,11 +41,11 @@ class _ClockPageState extends State<ClockPage> {
               children: [
                 Text(
                   formattedTime,
-                  style: TextStyle(color: Colors.white, fontSize: 64),
+                  style: TextStyle(color: Colors.blueGrey[200], fontSize: 64),
                 ),
                 Text(
                   formattedDate,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.blueGrey[200], fontSize: 20),
                 ),
               ],
             ),
@@ -72,16 +65,17 @@ class _ClockPageState extends State<ClockPage> {
               children: [
                 Text(
                   'Timezone',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                  style: TextStyle(color: Colors.blueGrey[200], fontSize: 24),
                 ),
                 SizedBox(height: 16),
                 Row(
                   children: [
-                    Icon(Icons.language, color: Colors.white),
+                    Icon(Icons.language, color: Colors.blueGrey[200]),
                     SizedBox(width: 16),
                     Text(
                       'UTC' + offsetSign + timezoneString,
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style:
+                          TextStyle(color: Colors.blueGrey[200], fontSize: 24),
                     ),
                   ],
                 ),

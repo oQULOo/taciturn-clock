@@ -68,29 +68,31 @@ class ClockPainter extends CustomPainter {
       ..strokeWidth = size.width / 20; //縁の太さ
 
     ///時計の中心の色
-    var centerFillBrush = Paint()..color = Colors.amber[50];
+    var centerFillBrush = Paint()..color = Colors.blueGrey[800];
 
     ///時計の針3本の色と描画スタイルを設定！
     var secHandBrush = Paint()
-      ..shader = RadialGradient(colors: [Colors.orangeAccent, Colors.pink])
-          .createShader(Rect.fromCircle(center: center, radius: radius))
+      ..shader =
+          RadialGradient(colors: [Colors.blueGrey[800], Colors.blueGrey[400]])
+              .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round //ラインを丸くする
       ..strokeWidth = size.width / 60;
 
     var minHandBrush = Paint()
-      ..shader = RadialGradient(colors: [Colors.lightBlue, Colors.lightGreen])
-          .createShader(Rect.fromCircle(center: center, radius: radius))
+      ..shader =
+          RadialGradient(colors: [Colors.blueGrey[800], Colors.blueGrey[400]])
+              .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = size.width / 30;
+      ..strokeWidth = size.width / 60;
 
     var hourHandBrush = Paint()
-      ..shader = RadialGradient(colors: [Colors.green, Colors.yellow])
+      ..shader = RadialGradient(colors: [Colors.red[700], Colors.red[100]])
           .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = size.width / 24;
+      ..strokeWidth = size.width / 60;
 
     ///時計回りの放射線状の線の描画スタイル
     var dashBrush = Paint()
@@ -99,33 +101,33 @@ class ClockPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    canvas.drawCircle(center, radius * 0.75, fillBrush); //時計の内側
-    canvas.drawCircle(center, radius * 0.75, outlineBrush); //時計の縁
+    // canvas.drawCircle(center, radius * 0.75, fillBrush); //時計の内側
+    // canvas.drawCircle(center, radius * 0.75, outlineBrush); //時計の縁
 
     ///時計の針のdrawLine終了点に使用
-    ///80*はcenterからの距離を離すために必要(？)
+    ///針の長さを変えたいとき：radius*n のn値を大きくする
     var hourHandX = centerX +
         radius *
-            0.4 *
+            0.6 *
             cos((dateTime.hour * 30 + dateTime.minute * 0.5) *
                 pi /
                 180); //1時間後に急に針ががくっと動くのはやなので毎分0.5度足していく
     var hourHandY = centerX +
         radius *
-            0.4 *
+            0.6 *
             sin((dateTime.hour * 30 + dateTime.minute * 0.5) * pi / 180);
     //時計の針:drawLine(開始点,終了点,描画スタイル)
     canvas.drawLine(center, Offset(hourHandX, hourHandY), hourHandBrush);
 
-    var minHandX = centerX + radius * 0.6 * cos(dateTime.minute * 6 * pi / 180);
-    var minHandY = centerX + radius * 0.6 * sin(dateTime.minute * 6 * pi / 180);
+    var minHandX = centerX + radius * 1 * cos(dateTime.minute * 6 * pi / 180);
+    var minHandY = centerX + radius * 1 * sin(dateTime.minute * 6 * pi / 180);
     canvas.drawLine(center, Offset(minHandX, minHandY), minHandBrush);
 
-    var secHandX = centerX + radius * 0.6 * cos(dateTime.second * 6 * pi / 180);
-    var secHandY = centerX + radius * 0.6 * sin(dateTime.second * 6 * pi / 180);
+    var secHandX = centerX + radius * 1 * cos(dateTime.second * 6 * pi / 180);
+    var secHandY = centerX + radius * 1 * sin(dateTime.second * 6 * pi / 180);
     canvas.drawLine(center, Offset(secHandX, secHandY), secHandBrush);
 
-    canvas.drawCircle(center, 12, centerFillBrush); //時計の中心点
+    canvas.drawCircle(center, 3, centerFillBrush); //時計の中心点
 
     ///時計回りの放射線状の線
     var outerCircleRadius = radius;
@@ -137,7 +139,7 @@ class ClockPainter extends CustomPainter {
       var x2 = centerX + innerCircleRadius * cos(i * pi / 180);
       var y2 = centerX + innerCircleRadius * sin(i * pi / 180);
 
-      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrush);
+      // canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrush);
     }
   }
 

@@ -46,11 +46,6 @@ class _AlarmPageState extends State<AlarmPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, //Alarmのタイトルを左寄せに
         children: [
-          Text(
-            'Alarm',
-            style: TextStyle(
-                fontWeight: FontWeight.w700, fontSize: 24, color: Colors.white),
-          ),
           Expanded(
             child: ListView(
                 children: alarms.map<Widget>((alarm) {
@@ -75,7 +70,7 @@ class _AlarmPageState extends State<AlarmPage> {
                       offset: Offset(4, 4),
                     ),
                   ],
-                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,19 +112,12 @@ class _AlarmPageState extends State<AlarmPage> {
                       children: [
                         ///時刻
                         Text(
-                          '07:00 AM',
+                          '18:00 PM',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                               fontWeight: FontWeight.w700),
                         ),
-
-                        ///時刻右手の下向き矢印
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          size: 36,
-                          color: Colors.white,
-                        )
                       ],
                     ),
                   ],
@@ -138,16 +126,16 @@ class _AlarmPageState extends State<AlarmPage> {
             }).followedBy([
               if (alarms.length < 5)
                 DottedBorder(
-                  strokeWidth: 3,
+                  strokeWidth: 0,
                   color: Colors.white,
                   borderType: BorderType.RRect, //点線を角丸にする
-                  radius: Radius.circular(24), //角丸のアール値を指定
+                  radius: Radius.circular(12), //角丸のアール値を指定
                   dashPattern: [7, 7], //[線分の長さ,間隔の幅]
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.all(Radius.circular(24))),
+                        color: Colors.blueGrey[100],
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: FlatButton(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16),
