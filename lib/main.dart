@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //右上のデバッグリボンを消している
       ///ChangeNotifier<T>の<T>は変更を察知させたいクラス名をいれるが、
       ///<T>自体がChangeNotifierを継承している必要がある
       home: ChangeNotifierProvider<MenuInfo>(
