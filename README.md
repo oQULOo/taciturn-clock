@@ -1,18 +1,9 @@
-# qulock_app
+# taciturn-clock
 
-A new Flutter application.
+**日常に溶け込むFlutter時計アプリ**<br>
+主張しない、時を刻々と刻んでくれる無口なアプリです。<br>
+<br>
+http://www.qulo.ooo/taciturn-clock
+<br>
+![taciturn-clock-small](https://user-images.githubusercontent.com/82689674/124359766-57ecb080-dc61-11eb-8865-5e4bca18bc94.png)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# QULOck-app
-# QULOck-app
